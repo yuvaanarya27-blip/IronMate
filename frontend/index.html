@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IronMate - Fitness & Gym Gear Storefront | AI Shopping Assistant</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E31E24'><path d='M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43 1.43 1.43 2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43 1.43-1.43-1.43-1.43 1.43-1.43-1.43-1.43z'/></svg>">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       TWO-TIER STICKY TOP NAVBAR
+       ========================================================================= -->
+  <header class="site-header">
+    <!-- TIER 1: MAIN SEARCH & ACTIONS HEADER -->
+    <div class="header-main">
+      <div class="container header-main-container">
+        <!-- Logo -->
+        <a href="#" class="brand-logo" id="logoBtn">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+              <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43 1.43 1.43 2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43 1.43-1.43-1.43-1.43 1.43-1.43-1.43-1.43z"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <span class="logo-title">IRON<span class="accent-red">MATE</span></span>
+            <span class="logo-subtitle">FITNESS & GYM GEAR</span>
+          </div>
+        </a>
+
+        <!-- Center Search Bar with Integrated AI Pill -->
+        <div class="header-search-wrapper">
+          <div class="search-pill-box">
+            <input 
+              type="text" 
+              id="globalSearchInput" 
+              placeholder="Search equipment, dumbbells, treadmills, supplements..." 
+              autocomplete="off"
+            >
+            <button class="ai-assistant-pill-btn" id="searchAiPillBtn" title="Launch IronMate AI Shopping Assistant">
+              <span class="sparkle-icon">✨</span>
+              <span>Personalised AI</span>
+            </button>
+            <button class="search-submit-btn" id="searchSubmitBtn" aria-label="Search">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Header Actions -->
+        <div class="header-actions">
+          <!-- User Account -->
+          <div class="account-menu-wrapper" id="accountMenuWrapper">
+            <button class="header-action-btn" id="accountBtn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span class="action-label" id="accountBtnLabel">Account</span>
+            </button>
+
+            <!-- Logged-in Dropdown Menu -->
+            <div class="user-dropdown-card" id="userDropdownCard">
+              <div class="user-dropdown-header">
+                <div class="dropdown-avatar" id="userAvatarLetter">U</div>
+                <div class="dropdown-user-info">
+                  <div class="dropdown-name" id="dropdownUserName">Demo Athlete</div>
+                  <div class="dropdown-email" id="dropdownUserEmail">demo@ironmate.com</div>
+                </div>
+              </div>
+              <div class="user-dropdown-divider"></div>
+              <button class="user-dropdown-item" id="navMyOrdersBtn">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <span>My Orders</span>
+              </button>
+              <button class="user-dropdown-item" id="navLogoutBtn">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Shopping Cart Button -->
+          <button class="header-action-btn cart-btn" id="openCartBtn" aria-label="Open Shopping Cart">
+            <div class="cart-icon-wrapper">
+              <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span class="cart-badge-count" id="cartBadgeCount">0</span>
+            </div>
+            <span class="action-label">Cart</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER 2: CATEGORY NAVIGATION BAR (EXCLUDES CELEBRITIES) -->
+    <nav class="header-tier2">
+      <div class="container tier2-container">
+        <ul class="nav-menu-list">
+          <!-- 1. Home Use Dropdown -->
+          <li class="nav-item has-dropdown" data-dropdown="home-use">
+            <a href="#" class="nav-link">
+              <span>Home Use</span>
+              <span class="dropdown-arrow">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="#catalog" class="dropdown-link" data-filter-cat="Treadmill,Bike,Weight">View all Home Use</a>
+              <a href="#catalog" class="dropdown-link" data-filter-cat="Treadmill">Treadmill</a>
+              <a href="#catalog" class="dropdown-link" data-filter-cat="Bike">Bike</a>
+              <a href="#catalog" class="dropdown-link" data-filter-cat="Weight">Weight</a>
+            </div>
+          </li>
+
+          <!-- 2. Bicycle Direct Link -->
+          <li class="nav-item">
+            <a href="#catalog" class="nav-link dropdown-link" data-filter-cat="Bicycle">
+              <span>Bicycle</span>
+            </a>
+          </li>
+
+          <!-- 3. Others Dropdown -->
+          <li class="nav-item has-dropdown" data-dropdown="others">
+            <a href="#" class="nav-link">
+              <span>Others</span>
+              <span class="dropdown-arrow">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="#catalog" class="dropdown-link" data-filter-cat="Rope,Mats,Shaker">View all Others</a>
+              <a href="#catalog" class="dropdown-link" data-filter-cat="Rope">Rope</a>
+              <a href="#catalog" class="dropdown-link" data-filter-cat="Mats">Mats</a>
+              <a href="#catalog" class="dropdown-link" data-filter-cat="Shaker">Shaker</a>
+            </div>
+          </li>
+
+          <!-- 4. Deals Dropdown -->
+          <li class="nav-item has-dropdown" data-dropdown="deals">
+            <a href="#" class="nav-link deals-link">
+              <span>Deals</span>
+              <span class="dropdown-arrow">▾</span>
+            </a>
+            <div class="nav-dropdown-menu">
+              <a href="#catalog" class="dropdown-link" data-filter-deal="all">All Today's Deals</a>
+              <a href="#catalog" class="dropdown-link" data-filter-deal="under2000">Under ₹2,000 Essentials</a>
+              <a href="#catalog" class="dropdown-link" data-filter-deal="bestsellers">Top 50%+ OFF Specials</a>
+              <a href="#catalog" class="dropdown-link" data-filter-deal="homegym">Home Gym Starter Bundles</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =========================================================================
+       HERO BANNER SHOWCASE SECTION (SCREENSHOT 1 STYLE)
+       ========================================================================= -->
+  <section class="hero-showcase-section">
+    <div class="hero-slider-container">
+      <!-- Slide Track -->
+      <div class="hero-slide active">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content-wrapper">
+          <div class="hero-text-block">
+            <div class="hero-badge">
+              <span class="pulse-dot"></span>
+              <span>NEW LAUNCH — 2026 PRO LINE</span>
+            </div>
+            <h1 class="hero-heading">
+              BUILD YOUR ULTIMATE HOME GYM WITH <span class="highlight-red">IRONMATE AI</span>
+            </h1>
+            <p class="hero-description">
+              Commercial-grade power racks, whisper-quiet magnetic rowers, and precision biomechanics.
+              Engineered with zero-cost AI assistance to find gear tailored exactly to your space and fitness goals.
+            </p>
+            <div class="hero-cta-group">
+              <a href="#catalog" class="btn btn-primary btn-pill">
+                Browse Products →
+              </a>
+              <button class="btn btn-outline-white btn-pill" id="heroTryAiBtn">
+                ✨ Launch AI Plan Finder
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Bottom Highlights Strip -->
+      <div class="hero-features-strip">
+        <div class="container hero-features-container">
+          <div class="hero-feature-item">
+            <span class="feature-icon">🛡️</span>
+            <span>Lifetime Frame Warranty</span>
+          </div>
+          <div class="hero-feature-item">
+            <span class="feature-icon">🚚</span>
+            <span>Free Pan-India Delivery</span>
+          </div>
+          <div class="hero-feature-item">
+            <span class="feature-icon">🛠️</span>
+            <span>3D Interactive Setup Guides</span>
+          </div>
+          <div class="hero-feature-item">
+            <span class="feature-icon">✨</span>
+            <span>Zero-Cost Gemini AI Assistant</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       TRUST STRIP (SCREENSHOT 1 STYLE)
+       ========================================================================= -->
+  <section class="trust-strip-section">
+    <div class="container trust-strip-container">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#16A34A" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Secure checkout</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#E31E24" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>100% genuine products</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2563EB" stroke-width="2.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span>Brand warranty</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       "FIND YOUR FIT" INTERACTIVE FILTER BOX (SCREENSHOT 2 STYLE)
+       ========================================================================= -->
+  <section class="find-your-fit-section">
+    <div class="container">
+      <div class="fit-filter-card">
+        <!-- Card Header -->
+        <div class="fit-card-header">
+          <h2 class="fit-title">Find your fit</h2>
+          <button class="clear-filters-link" id="clearFitFiltersBtn">Clear filters</button>
+        </div>
+
+        <!-- Row 1: GOAL -->
+        <div class="fit-filter-row">
+          <div class="fit-row-label">GOAL</div>
+          <div class="fit-pills-container" id="goalPillsContainer">
+            <button class="fit-pill" data-type="goal" data-value="strength">Strength</button>
+            <button class="fit-pill" data-type="goal" data-value="cardio">Cardio</button>
+            <button class="fit-pill" data-type="goal" data-value="muscle_gain">Muscle Building</button>
+            <button class="fit-pill" data-type="goal" data-value="fat_loss">Weight Loss</button>
+            <button class="fit-pill" data-type="goal" data-value="home_gym">Home Gym</button>
+            <button class="fit-pill" data-type="goal" data-value="endurance">Endurance</button>
+            <button class="fit-pill" data-type="goal" data-value="general_fitness">General Fitness</button>
+          </div>
+        </div>
+
+        <!-- Row 2: EXPERIENCE & SPACE (REQUIREMENTS) -->
+        <div class="fit-filter-row">
+          <div class="fit-row-label">EXPERIENCE &amp; SPACE</div>
+          <div class="fit-pills-container" id="spaceExpPillsContainer">
+            <button class="fit-pill" data-type="experience" data-value="beginner">Beginner</button>
+            <button class="fit-pill" data-type="experience" data-value="intermediate">Intermediate</button>
+            <button class="fit-pill" data-type="experience" data-value="advanced">Advanced</button>
+            <button class="fit-pill" data-type="space" data-value="none">No Space / Portable</button>
+            <button class="fit-pill" data-type="space" data-value="small">Compact / Small Space</button>
+            <button class="fit-pill" data-type="space" data-value="medium">Medium Space</button>
+            <button class="fit-pill" data-type="space" data-value="large">Large Dedicated Gym</button>
+          </div>
+        </div>
+
+        <!-- Row 3: BUDGET -->
+        <div class="fit-filter-row">
+          <div class="fit-row-label">BUDGET</div>
+          <div class="fit-pills-container" id="budgetPillsContainer">
+            <button class="fit-pill" data-type="budget" data-value="2000">Under ₹2,000</button>
+            <button class="fit-pill" data-type="budget" data-value="5000">₹2,000 - ₹5,000</button>
+            <button class="fit-pill" data-type="budget" data-value="15000">₹5,000 - ₹15,000</button>
+            <button class="fit-pill" data-type="budget" data-value="15001">₹15,000+</button>
+          </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="fit-card-footer">
+          <div class="fit-counter">
+            <span class="count-bold" id="fitLiveProductCount">30</span> products
+          </div>
+          <button class="btn btn-primary btn-pill fit-browse-btn" id="fitBrowseBtn">
+            Browse products →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3 FEATURE CARDS ROW (SCREENSHOT 2 STYLE)
+       ========================================================================= -->
+  <section class="feature-cards-section">
+    <div class="container">
+      <div class="feature-cards-grid">
+        <!-- Card 1: Commercial & Setup Packages -->
+        <div class="feature-card" id="featureCardSetup">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#E31E24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2"/>
+              <path d="M18 5h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-2"/>
+              <rect x="6" y="3" width="12" height="18" rx="2"/>
+              <line x1="10" y1="12" x2="14" y2="12"/>
+            </svg>
+          </div>
+          <h3 class="feature-card-title">Commercial &amp; Home Gym</h3>
+          <p class="feature-card-desc">Complete Setup Packages</p>
+        </div>
+
+        <!-- Card 2: AI Shopping Assistant -->
+        <div class="feature-card" id="featureCardAiChat">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#E31E24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              <circle cx="9" cy="10" r="1" fill="#E31E24"/>
+              <circle cx="12" cy="10" r="1" fill="#E31E24"/>
+              <circle cx="15" cy="10" r="1" fill="#E31E24"/>
+            </svg>
+          </div>
+          <h3 class="feature-card-title">AI Shopping Assistant</h3>
+          <p class="feature-card-desc">Ask Anything About Gear</p>
+        </div>
+
+        <!-- Card 3: Personalised Equipment Finder -->
+        <div class="feature-card" id="featureCardFinder">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#E31E24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <path d="M11 8v6M8 11h6"/>
+            </svg>
+          </div>
+          <h3 class="feature-card-title">Personalised Equipment Finder</h3>
+          <p class="feature-card-desc">Equipment That Fits You</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       CATALOG SECTION WITH SIDEBAR & RESPONSIVE GRID (SCREENSHOTS 3, 4, 6)
+       ========================================================================= -->
+  <section class="catalog-section" id="catalog">
+    <div class="container">
+      
+      <!-- Section Header with Category Tabs -->
+      <div class="catalog-header-area">
+        <div class="catalog-eyebrow">DISCOVER THE LATEST ADDITIONS</div>
+        <div class="catalog-title-tabs-row">
+          <h2 class="catalog-main-title" id="catalogHeadingText">PRODUCT CATEGORY</h2>
+          
+          <!-- Category Tabs -->
+          <div class="category-tabs-nav" id="categoryTabsNav">
+            <button class="cat-tab-btn active" data-category="all">All</button>
+            <button class="cat-tab-btn" data-category="Treadmill">Treadmill</button>
+            <button class="cat-tab-btn" data-category="Bike">Bike</button>
+            <button class="cat-tab-btn" data-category="Bicycle">Bicycle</button>
+            <button class="cat-tab-btn" data-category="Mats">Mats</button>
+            <button class="cat-tab-btn" data-category="Rope">Rope</button>
+            <button class="cat-tab-btn" data-category="Shaker">Shaker</button>
+            <button class="cat-tab-btn" data-category="Weight">Weight</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-Category Pill Bar (Screenshot 6 Style) -->
+      <div class="subcategory-pills-bar" id="subcatPillsBar">
+        <button class="subcat-pill active" data-sub="all">All Items</button>
+        <button class="subcat-pill" data-sub="Treadmill">Treadmill</button>
+        <button class="subcat-pill" data-sub="Bike">Bike</button>
+        <button class="subcat-pill" data-sub="Bicycle">Bicycle</button>
+        <button class="subcat-pill" data-sub="Mats">Mats</button>
+        <button class="subcat-pill" data-sub="Rope">Rope</button>
+        <button class="subcat-pill" data-sub="Shaker">Shaker</button>
+        <button class="subcat-pill" data-sub="Weight">Weight</button>
+      </div>
+
+      <!-- Main Catalog 2-Column Layout -->
+      <div class="catalog-layout-grid">
+        
+        <!-- LEFT SIDEBAR FILTERS (SCREENSHOT 4 & 6 STYLE) -->
+        <aside class="catalog-sidebar">
+          <div class="sidebar-filter-card">
+            <div class="sidebar-title-wrapper">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#E31E24" stroke-width="2.2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+              <h3 class="sidebar-heading">FILTERS</h3>
+            </div>
+            <div class="sidebar-red-underline"></div>
+
+            <!-- Group 0: EQUIPMENT CATEGORY -->
+            <div class="sidebar-filter-group">
+              <div class="filter-group-title">EQUIPMENT CATEGORY</div>
+              <label class="filter-check-label">
+                <input type="checkbox" name="catFilter" value="Treadmill">
+                <span class="custom-check-box"></span>
+                <span>Treadmill</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="catFilter" value="Bike">
+                <span class="custom-check-box"></span>
+                <span>Bike</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="catFilter" value="Bicycle">
+                <span class="custom-check-box"></span>
+                <span>Bicycle</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="catFilter" value="Mats">
+                <span class="custom-check-box"></span>
+                <span>Mats</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="catFilter" value="Rope">
+                <span class="custom-check-box"></span>
+                <span>Rope</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="catFilter" value="Shaker">
+                <span class="custom-check-box"></span>
+                <span>Shaker</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="catFilter" value="Weight">
+                <span class="custom-check-box"></span>
+                <span>Weight</span>
+              </label>
+            </div>
+
+            <!-- Group 1: FITNESS GOAL -->
+            <div class="sidebar-filter-group">
+              <div class="filter-group-title">FITNESS GOAL</div>
+              <label class="filter-check-label">
+                <input type="checkbox" name="goalFilter" value="fat_loss">
+                <span class="custom-check-box"></span>
+                <span>Weight loss</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="goalFilter" value="muscle_gain">
+                <span class="custom-check-box"></span>
+                <span>Muscle &amp; strength</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="goalFilter" value="cardio">
+                <span class="custom-check-box"></span>
+                <span>Cardio &amp; endurance</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="goalFilter" value="home_gym">
+                <span class="custom-check-box"></span>
+                <span>Home gym setup</span>
+              </label>
+            </div>
+
+            <!-- Group 2: EXPERIENCE LEVEL -->
+            <div class="sidebar-filter-group">
+              <div class="filter-group-title">EXPERIENCE LEVEL</div>
+              <label class="filter-check-label">
+                <input type="checkbox" name="expFilter" value="beginner">
+                <span class="custom-check-box"></span>
+                <span>Beginner</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="expFilter" value="intermediate">
+                <span class="custom-check-box"></span>
+                <span>Intermediate</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="expFilter" value="advanced">
+                <span class="custom-check-box"></span>
+                <span>Advanced</span>
+              </label>
+            </div>
+
+            <!-- Group 3: SPACE NEEDED -->
+            <div class="sidebar-filter-group">
+              <div class="filter-group-title">SPACE NEEDED</div>
+              <label class="filter-check-label">
+                <input type="checkbox" name="spaceFilter" value="none">
+                <span class="custom-check-box"></span>
+                <span>No space / portable</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="spaceFilter" value="small">
+                <span class="custom-check-box"></span>
+                <span>Small / apartment corner</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="spaceFilter" value="medium">
+                <span class="custom-check-box"></span>
+                <span>Medium room</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="checkbox" name="spaceFilter" value="large">
+                <span class="custom-check-box"></span>
+                <span>Large dedicated space</span>
+              </label>
+            </div>
+
+            <!-- Group 4: PRICE RANGE -->
+            <div class="sidebar-filter-group">
+              <div class="filter-group-title">₹ PRICE</div>
+              <label class="filter-check-label">
+                <input type="radio" name="priceRangeRadio" value="all" checked>
+                <span class="custom-radio-box"></span>
+                <span>All Prices</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="radio" name="priceRangeRadio" value="0-2000">
+                <span class="custom-radio-box"></span>
+                <span>Under ₹2,000</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="radio" name="priceRangeRadio" value="2000-5000">
+                <span class="custom-radio-box"></span>
+                <span>₹2,000 - ₹5,000</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="radio" name="priceRangeRadio" value="5000-15000">
+                <span class="custom-radio-box"></span>
+                <span>₹5,000 - ₹15,000</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="radio" name="priceRangeRadio" value="15000-35000">
+                <span class="custom-radio-box"></span>
+                <span>₹15,000 - ₹35,000</span>
+              </label>
+              <label class="filter-check-label">
+                <input type="radio" name="priceRangeRadio" value="35000-999999">
+                <span class="custom-radio-box"></span>
+                <span>Above ₹35,000</span>
+              </label>
+            </div>
+
+            <!-- Clear All Sidebar Filters -->
+            <button class="btn btn-outline btn-full btn-sm" id="resetSidebarFiltersBtn">
+              Reset Filters
+            </button>
+          </div>
+        </aside>
+
+        <!-- RIGHT MAIN PRODUCT GRID -->
+        <main class="catalog-main-content">
+          <!-- Top Control Bar -->
+          <div class="catalog-controls-bar">
+            <div class="catalog-products-count">
+              <span id="catalogCountNumber">30</span> products
+            </div>
+            
+            <div class="catalog-sort-wrapper">
+              <label for="catalogSortSelect" class="sort-label">Sort:</label>
+              <div class="custom-select-box">
+                <select id="catalogSortSelect">
+                  <option value="recommended">Recommended ▾</option>
+                  <option value="price_asc">Price: Low to High</option>
+                  <option value="price_desc">Price: High to Low</option>
+                  <option value="name">Name: A to Z</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Filter Tags Strip -->
+          <div class="active-filter-tags-strip" id="activeFilterTagsStrip"></div>
+
+          <!-- Product Card Grid -->
+          <div class="products-grid" id="productsGrid">
+            <!-- Dynamic product cards injected via app.js -->
+            <div class="grid-loading-placeholder">
+              <div class="spinner"></div>
+              <p>Loading IronMate products...</p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-col brand-col">
+        <div class="brand-logo footer-logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43 1.43 1.43 2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43 1.43-1.43-1.43-1.43 1.43-1.43-1.43-1.43z"/>
+            </svg>
+          </div>
+          <span class="logo-title">IRON<span class="accent-red">MATE</span></span>
+        </div>
+        <p class="footer-tagline">Premium fitness &amp; gym gear engineered for serious athletes. Zero-cost AI shopping assistant powered by Google Gemini.</p>
+        <div class="footer-social-icons">
+          <a href="#" aria-label="Facebook">🔵</a>
+          <a href="#" aria-label="Instagram">📸</a>
+          <a href="#" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-title">CATEGORIES</h4>
+        <ul class="footer-links">
+          <li><a href="#catalog" data-filter-cat="Treadmill">Treadmills</a></li>
+          <li><a href="#catalog" data-filter-cat="Bike">Exercise Bikes</a></li>
+          <li><a href="#catalog" data-filter-cat="Bicycle">Bicycles</a></li>
+          <li><a href="#catalog" data-filter-cat="Weight">Weight &amp; Bars</a></li>
+          <li><a href="#catalog" data-filter-cat="Mats">Gym Mats</a></li>
+          <li><a href="#catalog" data-filter-cat="Rope">Skipping Ropes</a></li>
+          <li><a href="#catalog" data-filter-cat="Shaker">Gym Shakers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-title">CUSTOMER CARE</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" onclick="openAiWithQuery('What is your return policy?')">30-Day Returns</a></li>
+          <li><a href="javascript:void(0)" onclick="openAiWithQuery('What is the shipping cost and delivery time?')">Shipping Policy</a></li>
+          <li><a href="javascript:void(0)" onclick="openAiWithQuery('What warranty do you provide on gym equipment?')">Equipment Warranty</a></li>
+          <li><a href="javascript:void(0)" onclick="openAiWithQuery('How do I assemble the equipment?')">Assembly Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-title">AI ASSISTANT</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" onclick="switchAiTab('finder')">Personalised Equipment Finder</a></li>
+          <li><a href="javascript:void(0)" onclick="switchAiTab('chat')">Store RAG Chatbot</a></li>
+          <li><a href="javascript:void(0)" onclick="switchAiTab('cart')">Cart-Aware Advisor</a></li>
+          <li><a href="javascript:void(0)" onclick="demoLoginAuto()">1-Click Demo Login</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-container">
+        <p>© 2026 IronMate Store. All rights reserved. Zero-Cost E-Commerce Architecture.</p>
+        <p>Built with Python Flask + SQLite + Gemini GenAI SDK.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       SLIDE-OVER SHOPPING CART DRAWER
+       ========================================================================= -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <!-- Header -->
+    <div class="cart-drawer-header">
+      <div class="cart-header-title-box">
+        <h3 class="cart-drawer-title">Shopping Cart</h3>
+        <span class="cart-drawer-count" id="cartDrawerCount">(0 items)</span>
+      </div>
+      <button class="drawer-close-btn" id="closeCartBtn" aria-label="Close Cart">✕</button>
+    </div>
+
+    <!-- Items List -->
+    <div class="cart-drawer-items" id="cartItemsList">
+      <!-- Injected via app.js -->
+    </div>
+
+    <!-- Footer Summary & Checkout -->
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="cart-summary-row">
+        <span>Delivery:</span>
+        <span class="text-green font-semibold">FREE</span>
+      </div>
+      <div class="cart-summary-row total-row">
+        <span>Total Amount:</span>
+        <span class="cart-grand-total" id="cartGrandTotal">₹0</span>
+      </div>
+      <button class="btn btn-primary btn-full btn-pill checkout-btn" id="proceedCheckoutBtn">
+        Proceed to Mock Checkout →
+      </button>
+      <button class="btn btn-outline btn-full btn-pill btn-sm" id="cartAskAiBtn">
+        ✨ Ask AI to review my cart
+      </button>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       PRODUCT DETAIL MODAL
+       ========================================================================= -->
+  <div class="modal-backdrop" id="productModalBackdrop">
+    <div class="modal-card product-modal-card">
+      <button class="modal-close-btn" id="closeProductModalBtn">✕</button>
+      <div class="product-modal-body" id="productModalBody">
+        <!-- Injected via app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       AUTH MODAL (LOGIN / SIGNUP + 1-CLICK DEMO LOGIN)
+       ========================================================================= -->
+  <div class="modal-backdrop" id="authModalBackdrop">
+    <div class="modal-card auth-modal-card">
+      <button class="modal-close-btn" id="closeAuthModalBtn">✕</button>
+      
+      <div class="auth-header">
+        <h3 class="auth-title">Welcome to IronMate</h3>
+        <p class="auth-subtitle">Log in to view order history and personalized gear sync.</p>
+      </div>
+
+      <!-- Quick 1-Click Demo Login Banner (Highlight for College Viva) -->
+      <div class="demo-login-box">
+        <div class="demo-login-info">
+          <strong>⚡ Quick Viva Demo:</strong>
+          <span>Instant testing with pre-seeded demo athlete account</span>
+        </div>
+        <button class="btn btn-primary btn-sm btn-pill" id="quickDemoLoginBtn">
+          1-Click Demo Login
+        </button>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="auth-tabs-nav">
+        <button class="auth-tab-btn active" id="tabLoginBtn">Sign In</button>
+        <button class="auth-tab-btn" id="tabSignupBtn">Create Account</button>
+      </div>
+
+      <!-- Login Form -->
+      <form class="auth-form" id="loginForm">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="loginEmail" placeholder="e.g. demo@ironmate.com" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+        <div class="auth-error-msg" id="loginErrorMsg"></div>
+        <button type="submit" class="btn btn-primary btn-full btn-pill">Sign In</button>
+      </form>
+
+      <!-- Signup Form -->
+      <form class="auth-form hidden" id="signupForm">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="signupName" placeholder="e.g. Alex Hunter" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="signupEmail" placeholder="alex@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Password (min 6 characters)</label>
+          <input type="password" id="signupPassword" placeholder="••••••••" required minlength="6">
+        </div>
+        <div class="auth-error-msg" id="signupErrorMsg"></div>
+        <button type="submit" class="btn btn-primary btn-full btn-pill">Create Free Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MY ORDERS HISTORY MODAL
+       ========================================================================= -->
+  <div class="modal-backdrop" id="ordersModalBackdrop">
+    <div class="modal-card orders-modal-card">
+      <button class="modal-close-btn" id="closeOrdersModalBtn">✕</button>
+      <div class="orders-modal-header">
+        <h3 class="orders-title">My Order History</h3>
+        <p class="orders-subtitle">Past purchases with live stock reconciliation records.</p>
+      </div>
+      <div class="orders-list-container" id="ordersListContainer">
+        <!-- Injected via app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MOCK CHECKOUT CONFIRMATION RECEIPT MODAL
+       ========================================================================= -->
+  <div class="modal-backdrop" id="checkoutReceiptBackdrop">
+    <div class="modal-card receipt-modal-card">
+      <button class="modal-close-btn" id="closeReceiptModalBtn">✕</button>
+      <div class="receipt-success-icon">✓</div>
+      <h3 class="receipt-title">Order Confirmed!</h3>
+      <p class="receipt-subtitle">Thank you for your order. Live inventory stock has been decremented in SQLite database.</p>
+      <div class="receipt-details-box" id="receiptDetailsBox">
+        <!-- Injected via app.js -->
+      </div>
+      <button class="btn btn-primary btn-full btn-pill" id="receiptContinueBtn">
+        Continue Shopping
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FLOATING AI SHOPPING ASSISTANT WIDGET (BOTTOM-RIGHT)
+       ========================================================================= -->
+  <!-- Floating Launcher Button -->
+  <button class="floating-ai-trigger" id="floatingAiTrigger" aria-label="Open AI Shopping Assistant">
+    <div class="ai-sparkle-dot"></div>
+    <span class="trigger-sparkle">✨</span>
+    <span class="trigger-text">AI Assistant</span>
+  </button>
+
+  <!-- AI Chat Window -->
+  <div class="ai-chat-window" id="aiChatWindow">
+    <!-- Window Header -->
+    <div class="ai-window-header">
+      <div class="ai-header-left">
+        <div class="ai-bot-avatar">🤖</div>
+        <div>
+          <div class="ai-bot-name">IronMate AI Assistant</div>
+          <div class="ai-bot-status"><span class="status-live-dot"></span> Live RAG Grounded</div>
+        </div>
+      </div>
+      <button class="ai-window-close" id="closeAiWindowBtn" aria-label="Close Assistant">✕</button>
+    </div>
+
+    <!-- 3 Modes Navigation Tabs -->
+    <div class="ai-mode-tabs">
+      <button class="ai-tab-btn active" data-tab="chat" id="aiTabChat">
+        💬 Store AI
+      </button>
+      <button class="ai-tab-btn" data-tab="finder" id="aiTabFinder">
+        🎯 Product Finder
+      </button>
+      <button class="ai-tab-btn" data-tab="cart" id="aiTabCart">
+        🛒 Cart Advisor
+      </button>
+    </div>
+
+    <!-- MODE 1: STORE RAG CHAT -->
+    <div class="ai-tab-pane active" id="paneChat">
+      <!-- Quick Prompt Suggestions -->
+      <div class="chat-quick-chips">
+        <button class="chip-btn" data-prompt="What adjustable dumbbells do you have?">Dumbbells</button>
+        <button class="chip-btn" data-prompt="What is your return and warranty policy?">Returns &amp; Warranty</button>
+        <button class="chip-btn" data-prompt="I have small room space, what gym equipment fits?">Small Space Gear</button>
+      </div>
+
+      <!-- Messages Stream -->
+      <div class="chat-messages-container" id="chatMessagesContainer">
+        <div class="ai-msg bot">
+          <div class="msg-bubble">
+            Hello! I am your <strong>IronMate AI Shopping Assistant</strong>. Ask me anything about our fitness equipment, specs, workout gear, or store policies!
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Bar -->
+      <form class="chat-input-form" id="chatInputForm">
+        <input 
+          type="text" 
+          id="chatInputText" 
+          placeholder="Ask about barbells, return policies, workout gear..." 
+          autocomplete="off"
+          required
+        >
+        <button type="submit" class="chat-send-btn" aria-label="Send">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- MODE 2: GUIDED PRODUCT FINDER (4-STEP FLOW) -->
+    <div class="ai-tab-pane" id="paneFinder">
+      <div class="finder-progress-bar">
+        <div class="progress-fill" id="finderProgressFill" style="width: 25%;"></div>
+      </div>
+      <div class="finder-body" id="finderBody">
+        <!-- Injected via app.js -->
+      </div>
+    </div>
+
+    <!-- MODE 3: CART-AWARE SHOPPING ASSISTANT -->
+    <div class="ai-tab-pane" id="paneCart">
+      <div class="cart-advisor-body" id="cartAdvisorBody">
+        <!-- Injected via app.js -->
+      </div>
+      <form class="chat-input-form" id="cartAdvisorInputForm">
+        <input 
+          type="text" 
+          id="cartAdvisorInputText" 
+          placeholder="Ask what else pairs with your cart..." 
+          autocomplete="off"
+        >
+        <button type="submit" class="chat-send-btn" aria-label="Send">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- JavaScript Application Bundle -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+# Environment Variables & Secrets
+.env
+.env.*
+*.env
+
+# SQLite Database & Storage
+*.db
+*.sqlite
+*.sqlite3
+ironmate.db
+instance/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing & Logs
+.pytest_cache/
+*.log
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Explicitly ensure seed data and equipment media remain tracked
+!products-seed.json
+!frontend/assets/
+!frontend/assets/products/
+!frontend/assets/products/*
